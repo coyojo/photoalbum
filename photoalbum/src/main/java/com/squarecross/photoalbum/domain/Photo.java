@@ -34,6 +34,8 @@ public class Photo {
     @Column(name = "file_size", unique = false, nullable = true)
     private int fileSize;
 
+
+    //  @CreationTimestamp는 새로운 photo를 업로드하여 DB INSERT할 때 자동으로 현재 시간을 입력해줍니다
     @Column(name = "uploaded_at", unique = false, nullable = true)
     @CreationTimestamp
     private Date uploadedAt;
