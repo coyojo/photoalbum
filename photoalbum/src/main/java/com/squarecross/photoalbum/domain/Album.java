@@ -1,5 +1,5 @@
 package com.squarecross.photoalbum.domain;
-
+// Domain은 DB안에서 쓰일 필드들을 정의, 해당 클래스를 만들면 DB에 테이블이 생성된다.
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
