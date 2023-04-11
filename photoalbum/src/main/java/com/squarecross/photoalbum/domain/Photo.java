@@ -40,8 +40,13 @@ public class Photo {
     @CreationTimestamp
     private Date uploadedAt;
 
+
+
+    //Foreign Key 설정
+    //Photo 여러장이 (Many) 하나의 앨범 (One) 에 속하므로 ManyToOne
+    //FetchType.LAZY는 Album 정보가 필요할 때만 불러오는 방식
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id")
+    @JoinColumn(name = "album_id") // album의 PK를 참조하므로 name="album_id"를 적어준다.
     private Album album;
 
     public Photo(){};

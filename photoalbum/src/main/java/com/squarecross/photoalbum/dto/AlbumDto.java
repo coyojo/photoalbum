@@ -1,5 +1,7 @@
 package com.squarecross.photoalbum.dto;
-
+//DTO는 Data Transfer Object
+//DTO는 API 내부에서 데이터를 들고다니는 캐리어로 비유할 수 있다.
+//API의 여러 레이어 안에서 어디서든지 DTO 안에 있는 데이터를 조회할 수 있도록 하는 Object이다.
 import java.util.Date;
 
 public class AlbumDto {

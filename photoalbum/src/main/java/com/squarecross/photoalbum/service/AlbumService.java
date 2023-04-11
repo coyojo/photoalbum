@@ -1,4 +1,7 @@
 package com.squarecross.photoalbum.service;
+// service 레이어는 비즈니스 로직을 처리
+//Controller에서 DTO를 받아 데이터가 맞게 들어왔는지 검증 후 DB요청이 필요한 경우
+// Repository를 호출
 
 import com.squarecross.photoalbum.domain.Album;
 import com.squarecross.photoalbum.dto.AlbumDto;
@@ -24,7 +27,10 @@ public class AlbumService {
     public AlbumDto getAlbum(Long albumId){
         Optional<Album> res = albumRepository.findById(albumId);
         //AlbumRepository에서 Album ID로 조회했을 때 찾지 못해서 반환이 되지 않는 경우를 대비해서 Optional<Album> 리턴값을 갖습니다.
-        if(res.isPresent()){
+        // DB에 접근하기 위한 메서드는 Repository에 있으니 albumRepository를 호출한 것
+        if(res.isPresent()){ //isPresernt가 true일 경우
+           // res.get();의 리턴값은 albumId에 해당하는 album 도메인 이므로 그것을 DTO로 변환해 줘야 한다.
+            // -> Albummapper에서 converToDto 메서드 정의해놓았으니 그것을 호출해서 사용하면 된다.
             AlbumDto albumDto = AlbumMapper.convertToDto(res.get());
             albumDto.setCount(photoRepository.countByAlbum_AlbumId(albumId));
             return albumDto;
