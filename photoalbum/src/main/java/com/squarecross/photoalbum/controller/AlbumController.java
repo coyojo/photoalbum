@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController  //Spring에서 관리하는 Controller라는 것을 나타내고 Rest API목적으로 사용할 것임을 나타냄
 @RequestMapping("/albums")  //https://<url>/albums 으로 들어오는 모든 요청은 해당 컨트롤러의 메서드에서 처리하게 된다.
 public class AlbumController {
@@ -35,4 +37,15 @@ public class AlbumController {
     }
 
     // http://localhost:8088/albums/json_body
+
+
+    //value="" 는 호출 URL이 단순 /albums 이고 이미 AlbumController에서 @RequestMapping("/albums")로
+    //정의해줬으니, 추가 경로가 없을 경우 아래의 메서드로 들어오게 된다.
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    public ResponseEntity<AlbumDto> createAlbum(@RequestBody final AlbumDto albumDto) throws IOException {
+        AlbumDto savedAlbumDto = albumService.createAlbum(albumDto);
+        return new ResponseEntity<>(savedAlbumDto,HttpStatus.OK);
+
+    }
+
 }

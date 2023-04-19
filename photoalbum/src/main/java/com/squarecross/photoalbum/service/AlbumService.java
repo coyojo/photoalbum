@@ -12,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import com.squarecross.photoalbum.Constants;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @Service
 public class AlbumService {
@@ -51,7 +55,21 @@ public class AlbumService {
 
     }
 
+    public AlbumDto createAlbum(AlbumDto albumDto) throws IOException {
+        Album album = AlbumMapper.convertToModel(albumDto);
+        this.albumRepository.save(album);
+        //save()는 albumRepository가 상속받는 JPARepository의 기본으로 제공되는 메서드
+        this.createAlbumDirectories(album);
+        return AlbumMapper.convertToDto(album);
+    }
 
-}
+    private void createAlbumDirectories(Album album) throws IOException {
+        Files.createDirectories(Paths.get(Constants.PATH_PREFIX+"/photos/original/"+ album.getAlbumId()));
+        Files.createDirectories(Paths.get(Constants.PATH_PREFIX + "/photos/thumb/" + album.getAlbumId()));
+    }
+    }
+
+
+
 
 

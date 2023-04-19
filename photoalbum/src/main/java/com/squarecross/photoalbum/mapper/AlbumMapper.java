@@ -7,7 +7,7 @@ import com.squarecross.photoalbum.dto.AlbumDto;
 
 public class AlbumMapper {
 
-    //mapper는 파일 내 Domain을 받아서 DTO를 리턴하는 스태틱 메서드를 만든다.
+    //파일 내 Domain을 받아서 DTO를 리턴하는 스태틱 메서드를 만든다.
     public static AlbumDto convertToDto(Album album){
         AlbumDto albumDto = new AlbumDto();
         albumDto.setAlbumId(album.getAlbumId());
@@ -20,4 +20,13 @@ public class AlbumMapper {
     // Count 값은 Model인 Domain에 없기 때문에 별도로 쿼리해서 Dto에 세팅 필요
     //그러기 위해서는 Album ID에 해당하는 Photo 레코드가 몇개 있는지 확인해야 하므로 Photo 테이블을
     //조회 할 수 있는 PhotoRepository를 만들어야 한다.
+
+    //DTO를 Domain으로 변환해주는 메서드를 정의하기
+    public static Album convertToModel(AlbumDto albumDto){
+        Album album = new Album();
+        album.setAlbumId(albumDto.getAlbumId());
+        album.setAlbumName(albumDto.getAlbumName());
+        album.setCreatedAt(albumDto.getCreatedAt());
+        return album;
+    }
 }
