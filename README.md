@@ -1,5 +1,5 @@
 # photoalbum
-개인프로젝트 - Java
+개인프로젝트 - Java, spring-boot
 
 <aside>
 💡 프로젝트 목적
